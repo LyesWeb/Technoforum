@@ -9,8 +9,10 @@ if (isset($_POST['entrer'])){
 	}else{
 		$pass = $_POST['pass'];
 		$pseudo = $_POST['pseudo'];
-		if($_POST['rester']) $le_temp = time()+24*60*60;
-		else $le_temp = 0;
+		$le_temp = 0;
+		if(isset($_POST['rester'])){
+			if($_POST['rester']) $le_temp = time()+24*60*60;
+		}
 		$result = mysqli_query($con,"SELECT u_id FROM `user` WHERE u_password='$pass' AND u_pseudo='$pseudo'");
 		if(mysqli_num_rows($result)<=0){
 			$msg = "<font color=red>les information est incorrect</font>";
