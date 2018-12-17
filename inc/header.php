@@ -106,8 +106,12 @@ $msg="";
 		<div class="nav">
 			<ul>
 				<li><a href="index.php">Home</a></li>
+				<?php
+					if(!isset($_COOKIE['u_id'])){
+				?>
 				<li><a href="register.php">S'inscrire</a></li>
 				<li><a href="login.php">S'identifier</a></li>
+				<?php } ?>
 				<li><a href="#">Aide</a></li>
 				<li><a href="recherche.php">Recherche</a></li>
 				<div class="recherche r">
