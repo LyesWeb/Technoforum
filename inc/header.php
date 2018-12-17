@@ -22,6 +22,7 @@ if (isset($_POST['entrer'])){
 	}
 }
 if(isset($_COOKIE['u_id'])){
+	$isNotAdmin = false;
 	$u_id = $_COOKIE['u_id'];
 	$result = mysqli_query($con,"SELECT * FROM `user` WHERE u_id=$u_id");
 	$user = mysqli_fetch_array($result);
@@ -29,8 +30,14 @@ if(isset($_COOKIE['u_id'])){
 		$s_posts = mysqli_query($con,"SELECT * FROM post WHERE p_stat=0");
 		$n_post_0 = mysqli_num_rows($s_posts);
 	}else{
-		$s_posts = mysqli_query($con,"SELECT * FROM post INNER JOIN forum ON forum.f_id=post.f_id WHERE p_stat=0 and forum.u_id=$u_id");
-		$n_post_0 = mysqli_num_rows($s_posts);
+		// is admin of an forum ?
+		$isAdmin = mysqli_query($con,"SELECT * FROM forum WHERE forum.u_id=$u_id");
+		if(mysqli_num_rows($isAdmin)>0){
+			$s_posts = mysqli_query($con,"SELECT * FROM post INNER JOIN forum ON forum.f_id=post.f_id WHERE p_stat=0 and forum.u_id=$u_id");
+			$n_post_0 = mysqli_num_rows($s_posts);
+		}else{
+			$isNotAdmin = true;
+		}
 	}
 
 }
@@ -69,7 +76,7 @@ $msg="";
 							</p>
 							<br>
 							<p>
-								<img src='images/flag.png'> <a href='newSujets.php'>les nouveaux sujets (<b>$n_post_0</b>)</a>
+								";if(!$isNotAdmin){echo "<img src='images/flag.png'> <a href='newSujets.php'>les nouveaux sujets (<b>$n_post_0</b>)</a>";}echo "
 							</p>
 							<br>
 							<p>
