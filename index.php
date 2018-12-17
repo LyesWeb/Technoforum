@@ -2,7 +2,7 @@
 include 'inc/header.php';
 $result = mysqli_query($con,"SELECT u_id FROM user");
 $num_members = mysqli_num_rows($result);
-$result = mysqli_query($con,"SELECT p_id FROM post WHERE p_stat!=3");
+$result = mysqli_query($con,"SELECT p_id FROM post WHERE p_stat!=3 and p_stat!=0");
 $num_posts = mysqli_num_rows($result);
 $result2 = mysqli_query($con,"SELECT c_id FROM comment");
 $num_comm = mysqli_num_rows($result2);
@@ -68,7 +68,7 @@ if(isset($user['u_level'])) if($user['u_level']==1){
 			<?php
 			$result = mysqli_query($con,"SELECT * FROM forum ORDER BY f_id DESC");
 			while ($forum = mysqli_fetch_array($result)) {
-				$num_sujet_in_forum = mysqli_query($con,"SELECT count(p_id) as n FROM post WHERE f_id={$forum['f_id']} and p_stat!=3");
+				$num_sujet_in_forum = mysqli_query($con,"SELECT count(p_id) as n FROM post WHERE f_id={$forum['f_id']} and p_stat!=3 and p_stat!=0");
 				$num_sujet_in_forum = mysqli_fetch_array($num_sujet_in_forum);
 
 				$num_comment_in_forum = mysqli_query($con,"SELECT count(c_id) as n FROM comment INNER JOIN post ON post.p_id=comment.p_id WHERE post.f_id={$forum['f_id']}");
