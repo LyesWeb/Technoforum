@@ -88,6 +88,7 @@ $Derniere_envoi = mysqli_fetch_array($Derniere_envoi);
 		$n_comment = mysqli_num_rows($n_comment);
 		$n_page = ceil($n_comment/5);
 		$pages_html='';
+		if($n_page>0)
 		for($i=1;$i<=$n_page; $i++){
 			$pages_html .= "<option value='post.php?id={$fetch_posts['p_id']}&page=$i'>$i</option>";
 		}
@@ -104,7 +105,7 @@ $Derniere_envoi = mysqli_fetch_array($Derniere_envoi);
 				<td align='left'>
 					<h3 class='sujet_title'><a href='post.php?id={$fetch_posts['p_id']}'>{$fetch_posts['p_title']}</a></h3>
 				</td>
-				<td align='center'><select onchange='window.location=this.value;'>$pages_html</select></td>
+				<td align='center'>";if($n_page>0){echo"<select onchange='window.location=this.value;'>$pages_html</select>";}echo"</td>
 				<td align='center'><a href='user.php?id={$fetch_posts['u_id']}'>{$fetch_posts['u_pseudo']}</a></td>
 				<td align='center'>$n_comment</td>
 				<td align='center'>{$fetch_posts['p_vus']}</td>
