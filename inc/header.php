@@ -1,14 +1,16 @@
 <?php
 include 'inc/config.php';
 if (isset($_POST['entrer'])){
+	$msg = "";
 	if(empty($_POST['pass']) OR empty($_POST['pseudo'])){
 		$msg = "<font color=red>entrer touts les informations</font>";
 	}else{
 		$pass = $_POST['pass'];
 		$pseudo = $_POST['pseudo'];
-		IF(isset($_POST['rester']))
-		if($_POST['rester']) $le_temp = time()+24*60*60;
-		else $le_temp = 0;
+		$le_temp = 0;
+		if(isset($_POST['rester'])){
+			if($_POST['rester']) $le_temp = time()+24*60*60;
+		}
 		$result = mysqli_query($con,"SELECT u_id FROM `user` WHERE u_password='$pass' AND u_pseudo='$pseudo'");
 		if(mysqli_num_rows($result)<=0){
 			$msg = "<font color=red>les information est incorrect</font>";
@@ -84,7 +86,7 @@ $msg="";
 								<input id='loginPassword' name='pass' type='password' placeholder='password'>
 								<input id='entrer' name='entrer' type='submit' value='entrer'>
 								<br><br>
-								<input type=checkbox $checked name=rester value=1> rester connecter
+								<input type=checkbox $checked name='rester' value=1> rester connecter
 								<br><br>
 								$msg
 							</form>

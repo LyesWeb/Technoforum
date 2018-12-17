@@ -1,9 +1,8 @@
 <?php
-include 'inc/header.php';
 if (isset($_COOKIE['u_id'])) {
-	echo "<meta http-equiv='refresh' content='0; url=index.php'/>";
-	exite;
+	header("location: index.php");
 }
+include 'inc/header.php';
 if (isset($_POST['entrer'])){
 	if(empty($_POST['pass']) OR empty($_POST['pseudo'])){
 		$msg = "<font color=red>entrer touts les informations</font>";

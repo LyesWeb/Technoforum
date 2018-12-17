@@ -1,8 +1,7 @@
 <?php
 include 'inc/header.php';
 if (isset($_COOKIE['u_id'])) {
-	echo "<meta http-equiv='refresh' content='0; url=index.php'/>";
-	exite;
+	header("location: index.php");
 }
 if(isset($_POST['submit'])){
 	$nom = $_POST['nom'];
