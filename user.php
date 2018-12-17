@@ -6,7 +6,6 @@ $user_id = $_GET['id'];
 
 // edite profile
 if(isset($_POST['editer'])) {
-	$img_user 		= $_POST['img_user'];
 	$pseudo 		= $_POST['pseudo'];
 	$nom 			= $_POST['nom'];
 	$prenom 		= $_POST['prenom'];
@@ -134,7 +133,7 @@ $n_post = mysqli_num_rows($result_post);
 
 										echo "<input name=sex type=radio value='famme' ";
 
-										if($profile['u_sex']=='famme') echo "checked> famme";
+										if($profile['u_sex']=='famme') echo "checked> femme";
 										else echo "> femme "; 
 									?>
 								</td>
